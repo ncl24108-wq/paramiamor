@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti ❤️</title>
+    <!-- Conectamos con el archivo CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuentes románticas desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Capa oscura suave para que el texto se lea bien sobre la foto -->
+    <div class="overlay"></div>
+
+    <!-- Contenido principal -->
+    <main class="contenedor">
+        <header class="cabecera">
+            <h1>Para el negro mas bonito</h1>
+            <p>Toca los corazones para descubrir un mensaje especial</p>
+        </header>
+
+        <!-- Botones de corazones interactivos -->
+        <div class="grid-corazones">
+            <button class="corazon-btn" onclick="abrirMensaje(0)" style="--delay: 0s">
+                <span class="icono">❤️</span>
+                <span class="etiqueta">Por qué te amo</span>
+            </button>
+
+            <button class="corazon-btn" onclick="abrirMensaje(1)" style="--delay: 0.3s">
+                <span class="icono">💖</span>
+                <span class="etiqueta">Nuestro recuerdo</span>
+            </button>
+
+            <button class="corazon-btn" onclick="abrirMensaje(2)" style="--delay: 0.6s">
+                <span class="icono">💝</span>
+                <span class="etiqueta">Una promesa</span>
+            </button>
+
+            <button class="corazon-btn" onclick="abrirMensaje(3)" style="--delay: 0.9s">
+                <span class="icono">💘</span>
+                <span class="etiqueta">Vale especial</span>
+            </button>
+
+            <button class="corazon-btn" onclick="abrirMensaje(4)" style="--delay: 1.2s">
+                <span class="icono">💕</span>
+                <span class="etiqueta">Nuestra canción</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Ventana emergente (Modal) para mostrar el mensaje -->
+    <div id="modal" class="modal" onclick="cerrarModal(event)">
+        <div class="tarjeta-mensaje">
+            <button class="cerrar" onclick="cerrarModalDirecto()">&times;</button>
+            <div class="corazon-modal">❤️</div>
+            <h2 id="modal-titulo">Título</h2>
+            <p id="modal-texto">Texto del mensaje...</p>
+            <button class="btn-amor" onclick="lluviaDeCorazones()">Enviar mucho amor ✨</button>
+        </div>
+    </div>
+
+    <!-- JavaScript para la interactividad -->
+    <script>
+        // AQUÍ PUEDES PERSONALIZAR TUS MENSAJES
+        const mensajes = [
+            {
+                titulo: "Por qué te amo",
+                texto: "Porque estas cuando todos me dan la espalda, estas en todas mis mañanas, estas en todos los lados de mi casa sin estarlo y en cada brillito dorado y azul te veo a vos.Aunque no sea la mejor siempre recibo lo mejor de vos"
+            },
+            {
+                titulo: "Nuestro mejor recuerdo",
+                texto: "Cuando me pediste ser tu novia, fue y es una secuencia de muchos recuerdos graciosos y donde ya teniamos tanta afinidad y confianza."
+            },
+            {
+                titulo: "Mi promesa para vos",
+                texto: "Prometo estar siempre a tu lado, apoyarte en cada sueño, celebrar tus logros y abrazarte fuerte cuando lo necesites y perdon si ahora no soy suficiente pero estoy construyendo la mejor versión para que quieras seguir a mi lado y nunca quieras renunciar a nuestras metas.Te amo."
+            },
+            {
+                titulo: "Vale por una cita",
+                texto: "Este corazón es un cupón válido por una salida de novios, una noche de películas o el plan que tú quieras."
+            },
+            {
+                titulo: "Nuestra canción",
+                texto: "Supieran cuánto fuego hay entre los dos Celoso llevo en mi boca tu sabor Mariposa, te vas, y me toca esperar donde siempre Que tus alas vuelvan pronto Mi amor"
+            }
+        ];
+
+        const modal = document.getElementById('modal');
+        const tituloEl = document.getElementById('modal-titulo');
+        const textoEl = document.getElementById('modal-texto');
+
+        function abrirMensaje(indice) {
+            tituloEl.textContent = mensajes[indice].titulo;
+            textoEl.textContent = mensajes[indice].texto;
+            modal.classList.add('activo');
+            lluviaDeCorazones();
+        }
+
+        function cerrarModalDirecto() {
+            modal.classList.remove('activo');
+        }
+
+        function cerrarModal(e) {
+            if (e.target === modal) {
+                cerrarModalDirecto();
+            }
+        }
+
+        // Efecto de lluvia de corazones flotantes
+        function lluviaDeCorazones() {
+            const emojis = ['❤️', '💖', '💕', '💗', '💓'];
+            for (let i = 0; i < 18; i++) {
+                const corazon = document.createElement('div');
+                corazon.classList.add('corazon-flotante');
+                corazon.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                corazon.style.left = Math.random() * 100 + 'vw';
+                corazon.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                corazon.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                document.body.appendChild(corazon);
+
+                setTimeout(() => corazon.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
